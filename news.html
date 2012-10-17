@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ellis App Mobile</title>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<link href="jquery-mobile/jquery.mobile-1.2.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-mobile/jquery-1.5.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.ios.js"></script>    
+<script type="text/javascript" src="jquery-mobile/statusbarnotification.js" charset="utf-8"></script>
+<script type="text/javascript">
+var language_root = 'it';
+//document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	var language = navigator.language.split("-");
+	language_root = (language[0]);
+	
+	listaNewsDB();
+
+}
+
+//--------------------------------------------------------------//
+// TROVO LA LISTA NEWS
+//
+function listaNewsDB() {
+	//alert("sdasdas");
+	//var output = $('#dett-news');
+	$.ajax({
+		url: 'http://test.vision121.it/appPhoneGap/ext/news-list.php',
+		dataType: 'jsonp',
+		data: "lingua=" + language_root,
+		jsonp: 'jsoncallback',
+		timeout: 5000,
+		success: function(data, status){
+			
+			//output.empty();
+			//output.append('<div data-role="collapsible-set" data-theme="c" data-content-theme="a">');
+			$.each(data, function(i,item){					
+				if (i <=4) {
+					
+					$("#h3"+i).append(this["titolo"]);
+					
+					$("#p"+i).append(this["descrizione"]);
+				}
+				//imgNewsDB(this["id"]);
+				
+			});
+			//output.append('</div>');
+			
+			//CARICO IMG NEWS
+			
+			/*db.transaction(docNewsDB, errorCB, successCB);*/
+		},
+		error: function(jqXHR, exception){
+			if (jqXHR.status === 0) {
+				alert('Not connect.\n Verify Network.');
+			} else if (jqXHR.status == 404) {
+				alert('Requested page not found. [404]');
+			} else if (jqXHR.status == 500) {
+				alert('Internal Server Error [500].');
+			} else if (exception === 'parsererror') {
+				alert('Requested JSON parse failed.');
+			} else if (exception === 'timeout') {
+				alert('Time out error.');
+			} else if (exception === 'abort') {
+				alert('Ajax request aborted.');
+			} else {
+				alert('Uncaught Error.\n' + jqXHR.responseText);
+			}
+		}
+	});
+}
+
+$(document).ready(function(e) {
+	onDeviceReady();
+	// -------------------------------------------- //
+	//ADD COPYRIGHT
+    var my_date = new Date();	
+	$("#c-copy").text("Copyright Ellis "+my_date.getFullYear());
+	
+	
+});
+
+
+
+
+</script>
+</head>
+<body>
+<div data-role="page" id="news" data-theme="a" data-add-back-btn="false" class="gallery-page">
+        <div id="header" data-theme="a" data-role="header" data-backbtn="false" data-position="fixed">
+            <div class="logo" data-theme="a"> <a href="index.html" rel="external"><img src="http://test.vision121.it/appPhoneGap/img/logo.png" alt="logo" /></a></div>
+            <div data-role="navbar" data-grid="b" data-theme="a" >
+              <ul>
+                <li> <a id="btnChiSiamo" data-role="button" data-theme="a" data-transition="slide" href="company.html" rel="external"> Company </a> </li>
+                <li> <a id="btnProdotti" data-role="button" data-theme="a" data-transition="slide" href="products.html" rel="external" > Products </a> </li>
+                <li> <a id="btnNews" data-role="button" data-theme="a" data-transition="slide" href="news.html" rel="external" class="ui-btn-active ui-state-persist" > News </a> </li>
+                <li> <a id="btnDealers" data-role="button" data-theme="a" data-transition="slide" href="dealers.html" rel="external" > Dealers </a> </li>
+                <li> <a id="btnContact" data-role="button" data-theme="a" data-transition="slide" href="contacts.html" rel="external" > Contact </a> </li>
+                <li><a id="back" data-role="button" data-theme="a" href="index.html" rel="external">Home</a></li>
+              </ul>
+            </div>
+        </div>
+        <div data-role="content" >
+            <div data-role="collapsible-set">
+                <div data-role="collapsible">
+                    <h3>
+                    <span id="h30"></span> 
+                    </h3>
+                    <p>
+                    <span id="p0"></span>  
+                    </p>
+                </div>
+                <div data-role="collapsible">
+                    <h3>
+                    <span id="h31"></span> 
+                    </h3>
+                    <p>
+                    <span id="p1"></span>  
+                    </p>
+                </div>
+                <div data-role="collapsible">
+                    <h3>
+                    <span id="h32"></span> 
+                    </h3>
+                    <p>
+                    <span id="p2"></span>  
+                    </p>
+                </div>
+                <div data-role="collapsible">
+                    <h3>
+                    <span id="h33"></span> 
+                    </h3>
+                    <p>
+                    <span id="p3"></span>  
+                    </p>
+                </div>
+                <div data-role="collapsible">
+                    <h3>
+                    <span id="h34"></span> 
+                    </h3>
+                    <p>
+                    <span id="p4"></span>  
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="footer" id="footerDiv" role="footer">
+            <h4 id="c-copy"> </h4>
+        </div>
+    </div>
+    
+<script src="jquery-mobile/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ellis App Mobile</title>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>    	
+<link href="jquery-mobile/jquery.mobile-1.2.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-mobile/jquery-1.5.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.ios.js"></script>    
+<script type="text/javascript" src="jquery-mobile/statusbarnotification.js" charset="utf-8"></script>
+<script type="text/javascript">
+var language_root = 'it';
+//document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+	var language = navigator.language.split("-");
+	language_root = (language[0]);
+	
+	listaProdDB(language_root);
+}
+
+//--------------------------------------------------------------//
+// TROVO LA LISTA PRODOTTI
+//
+function listaProdDB(language_root) {
+	var output = $('#lista-prod');
+	$.ajax({
+		url: 'http://test.vision121.it/appPhoneGap/ext/findprod.php',
+		dataType: 'jsonp',
+		data: "lingua=" + language_root,
+		jsonp: 'jsoncallback',
+		timeout: 5000,
+		success: function(data, status){
+			output.empty();
+			$.each(data, function(i,item){					
+				output.append('<li><a href="javascript:getDettProd('+this["id"]+');"><img src="http://test.vision121.it/appPhoneGap/_files/immagini/'+this["immagine"]+'" alt="'+this["nome"]+'"  /><br />'+this["nome"]+'</a></li>');
+
+				
+			});
+		},
+		error: function(){
+			//alert("error");
+			/*output.text('C\'è un errore nel caricamento dei dati.');
+				navigator.notification.confirm(
+					'Qualcosa non va. Vuoi riprovare?',
+					yourCallback,
+					'Errore',
+					'No,Si'
+				);*/
+
+		}
+	});
+}
+
+//--------------------------------------------------------------//
+// DETTAGLIO PRODOTTI
+//
+function getDettProd(id) {
+			
+	var output = $('#dett-prod');
+	$.ajax({
+		url: 'http://test.vision121.it/appPhoneGap/ext/dett-prod-'+language_root+'.php',
+		dataType: 'jsonp',
+		data: {
+			lingua: + language_root,
+			id_prod: + id
+		},
+		jsonp: 'jsoncallback',
+		timeout: 5000,
+		success: function(data, status){
+
+			output.empty();
+			$.each(data, function(i,item){		
+				
+					$('<a data-role="button" href="products.html" rel="external" ><< Lista Prodotti</a>').appendTo(output);
+					$('<div id="dett-prod-img"><img src="http://test.vision121.it/appPhoneGap/_files/immagini/'+this["immagine"]+'" alt="'+this["nome"]+'"  /></div><div id="dett-prod-txt"><h2>'+this["nome"]+'</h2>'+this["descrizione"]+'</div>').appendTo(output);
+			});
+		},
+		error: function(jqXHR, exception){
+			if (jqXHR.status === 0) {
+				alert('Not connect.\n Verify Network.');
+			} else if (jqXHR.status == 404) {
+				alert('Requested page not found. [404]');
+			} else if (jqXHR.status == 500) {
+				alert('Internal Server Error [500].');
+			} else if (exception === 'parsererror') {
+				alert('Requested JSON parse failed.');
+			} else if (exception === 'timeout') {
+				alert('Time out error.');
+			} else if (exception === 'abort') {
+				alert('Ajax request aborted.');
+			} else {
+				alert('Uncaught Error.\n' + jqXHR.responseText);
+			}
+		}
+	});
+	
+	
+}
+
+// Query the success callback
+//
+/*function querySuccessDettProd(tx, results) {
+	var output = $('#dett-prod');
+	output.empty();
+	var len = results.rows.length;
+	for (var i=0; i<len; i++){
+		$('<a data-role="button" href="javascript:backButton();"><< Lista Prodotti</a>').appendTo($('#dett-prod'));
+		$('<div id="dett-prod-img"><img src="http://test.vision121.it/appPhoneGap/_files/immagini/'+results.rows.item(i).immagine+'" alt="'+results.rows.item(i).nome+'"  /></div><div id="dett-prod-txt"><h2>'+results.rows.item(i).nome+'</h2>'+results.rows.item(i).descrizione+'</div>').appendTo($('#dett-prod'));
+						
+	}
+}*/
+
+function backButton() {
+	
+}
+
+$(document).ready(function(e) {
+	onDeviceReady();
+	// -------------------------------------------- //
+	//ADD COPYRIGHT
+    var my_date = new Date();	
+	$("#c-copy").text("Copyright Ellis "+my_date.getFullYear());
+	
+});
+</script>
+</head>
+<body>
+<div data-role="page" id="company" data-backbtn="false" data-theme="a">
+        <div id="header" data-theme="a" data-role="header" data-backbtn="false" data-position="fixed">
+            <div class="logo" data-theme="a"> <a href="index.html" rel="external"><img src="http://test.vision121.it/appPhoneGap/img/logo.png" alt="logo" /></a></div>
+            <div data-role="navbar" data-grid="b" data-theme="a" >
+              <ul>
+                <li> <a id="btnChiSiamo" data-role="button" data-theme="a" data-transition="slide" href="company.html" rel="external" > Company </a> </li>
+                <li> <a id="btnProdotti" data-role="button" data-theme="a" data-transition="slide" href="products.html" rel="external" class="ui-btn-active ui-state-persist" > Products </a> </li>
+                <li> <a id="btnNews" data-role="button" data-theme="a" data-transition="slide" href="news.html" rel="external" > News </a> </li>
+                <li> <a id="btnDealers" data-role="button" data-theme="a" data-transition="slide" href="dealers.html" rel="external" > Dealers </a> </li>
+                <li> <a id="btnContact" data-role="button" data-theme="a" data-transition="slide" href="contacts.html" rel="external" > Contact </a> </li>
+                <li><a id="back" data-role="button" data-theme="a" href="index.html" rel="external">Home</a></li>
+              </ul>
+            </div>
+        </div>
+        <div data-role="content" id="dett-prod" class="content">
+            <ul id="lista-prod">
+                
+            </ul>
+        </div>      
+        <div data-role="footer" id="footerDiv" role="footer">
+            <h4 id="c-copy"> </h4>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ellis App Mobile</title>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>    	
+<link href="jquery-mobile/jquery.mobile-1.2.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-mobile/jquery-1.5.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.ios.js"></script>    
+<script type="text/javascript" src="jquery-mobile/statusbarnotification.js" charset="utf-8"></script>
+<script type="text/javascript">
+var language_root = 'it';
+//document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	var language = navigator.language.split("-");
+	language_root = (language[0]);
+}
+
+$(document).ready(function(e) {
+	onDeviceReady();
+	// -------------------------------------------- //
+	//ADD COPYRIGHT
+    var my_date = new Date();	
+	$("#c-copyC").text("Copyright Ellis "+my_date.getFullYear());
+	
+});
+</script>
+</head>
+<body>
+<div data-role="page" id="company" data-backbtn="false" data-theme="a">
+        <div id="header" data-theme="a" data-role="header" data-backbtn="false" data-position="fixed">
+            <div class="logo" data-theme="a"> <a href="index.html" rel="external"><img src="http://test.vision121.it/appPhoneGap/img/logo.png" alt="logo" /></a></div>
+            <div data-role="navbar" data-grid="b" data-theme="a" >
+              <ul>
+                <li> <a id="btnChiSiamo" data-role="button" data-theme="a" data-transition="slide" href="company.html" rel="external" > Company </a> </li>
+                <li> <a id="btnProdotti" data-role="button" data-theme="a" data-transition="slide" href="products.html" rel="external" > Products </a> </li>
+                <li> <a id="btnNews" data-role="button" data-theme="a" data-transition="slide" href="news.html" rel="external" > News </a> </li>                
+                <li> <a id="btnDealers" data-role="button" data-theme="a" data-transition="slide" href="dealers.html" rel="external" > Dealers </a> </li>
+                <li> <a id="btnContact" data-role="button" data-theme="a" data-transition="slide" href="contacts.html" rel="external" class="ui-btn-active ui-state-persist"> Contact </a> </li>
+                <li><a id="back" data-role="button" data-theme="a" href="index.html" rel="external">Home</a></li>
+              </ul>
+            </div>
+        </div>
+        <div data-role="content">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Via Rossi 01, 32340, Vicenza, Italia&amp;zoom=14&amp;size=288x200&amp;markers=Via Rossi 01, 32340, Vicenza, Italia&amp;sensor=false" width="288" height="200">
+            
+            <br>
+			<div class="box-txt">
+            <b>Ellis Engineering</b><br>
+			<br>
+			Via Rossi, 01<br>
+			32340 - Vicenza<br>
+            Italy<br>
+			<br>
+			<strong>Tel.</strong>: +39 0424 123456<br>
+			<strong>E-Mail</strong>: info@ellis.com
+            </div>
+        </div>        
+        <div data-role="footer" id="footerDiv" role="footer">
+            <h4 id="c-copyC"> </h4>
+        </div>
+    </div>
+</body>
+</html>

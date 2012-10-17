@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ellis App Mobile</title>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>    	
+<link href="jquery-mobile/jquery.mobile-1.2.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-mobile/jquery-1.5.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.ios.js"></script>    
+<script type="text/javascript" src="jquery-mobile/statusbarnotification.js" charset="utf-8"></script>
+<script type="text/javascript">
+var language_root = 'it';
+//document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	var language = navigator.language.split("-");
+	language_root = (language[0]);
+	
+	if (language_root == 'it') {
+		$("#cont-company").append("ITALIANO Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.");
+	} else {
+		$("#cont-company").append("ENGLISH Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.");
+	}
+}
+
+$(document).ready(function(e) {
+	//COMPANY
+	//
+	onDeviceReady();
+	
+
+	
+	// -------------------------------------------- //
+	//ADD COPYRIGHT
+    var my_date = new Date();	
+	$("#c-copyC").text("Copyright Ellis "+my_date.getFullYear());
+	
+});
+</script>
+</head>
+<body>
+<div data-role="page" id="company" data-backbtn="false" data-theme="a">
+        <div id="header" data-theme="a" data-role="header" data-backbtn="false" data-position="fixed">
+            <div class="logo" data-theme="a"> <a href="index.html" rel="external"><img src="http://test.vision121.it/appPhoneGap/img/logo.png" alt="logo" /></a></div>
+            <div data-role="navbar" data-grid="b" data-theme="a" >
+              <ul>
+                <li> <a id="btnChiSiamo" data-role="button" data-theme="a" data-transition="slide" href="#" class="ui-btn-active ui-state-persist" > Company </a> </li>
+                <li> <a id="btnProdotti" data-role="button" data-theme="a" data-transition="slide" href="products.html" rel="external" > Products </a> </li>
+                <li> <a id="btnNews" data-role="button" data-theme="a" data-transition="slide" href="news.html" rel="external" > News </a> </li>
+                <li> <a id="btnDealers" data-role="button" data-theme="a" data-transition="slide" href="dealers.html" rel="external" > Dealers </a> </li>
+                <li> <a id="btnContact" data-role="button" data-theme="a" data-transition="slide" href="contacts.html" rel="external" > Contact </a> </li>
+                <li><a id="back" data-role="button" data-theme="a" href="index.html" rel="external">Home</a></li>
+              </ul>
+            </div>
+        </div>
+        <div data-role="content" id="cont-company" class="box-txt">
+        
+        </div>        
+        <div data-role="footer" id="footerDiv" role="footer">
+            <h4 id="c-copyC"> </h4>
+        </div>
+    </div>
+</body>
+</html>

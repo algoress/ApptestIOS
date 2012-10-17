@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ellis App Mobile</title>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<link href="jquery-mobile/jquery.mobile-1.2.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-mobile/jquery-1.5.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.2.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8" src="cordova.ios.js"></script>    
+<script type="text/javascript" src="jquery-mobile/statusbarnotification.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+var language_root = 'it';
+//document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	var language = navigator.language.split("-");
+	language_root = (language[0]);
+	
+	
+}
+
+$(document).ready(function(e) {
+	onDeviceReady();
+	//findStato();
+	// -------------------------------------------- //
+	//ADD COPYRIGHT
+    var my_date = new Date();	
+	$("#c-copy").text("Copyright Ellis "+my_date.getFullYear());
+	
+});
+
+function findStato() {
+	$.ajax({
+		url: 'http://test.vision121.it/appPhoneGap/ext/findNations.php',
+		dataType: 'jsonp',
+		data: "lingua=" + language_root,
+		jsonp: 'jsoncallback',
+		timeout: 5000,
+		success: function(data, status){
+			
+			$("#stato").append('<option value="">Seleziona una nazione</option>');
+			$.each(data, function(i,item){
+				$("#stato").append('<option value="'+this["stato"]+'" >'+this["stato"]+'</option>');
+			});
+		},
+		error: function(jqXHR, exception){
+			if (jqXHR.status === 0) {
+				alert('Not connect.\n Verify Network.');
+			} else if (jqXHR.status == 404) {
+				alert('Requested page not found. [404]');
+			} else if (jqXHR.status == 500) {
+				alert('Internal Server Error [500].');
+			} else if (exception === 'parsererror') {
+				alert('Requested JSON parse failed.');
+			} else if (exception === 'timeout') {
+				alert('Time out error.');
+			} else if (exception === 'abort') {
+				alert('Ajax request aborted.');
+			} else {
+				alert('Uncaught Error.\n' + jqXHR.responseText);
+			}
+		}
+	});
+}
+
+function findSearch(valore) {
+	$.ajax({
+		url: 'http://test.vision121.it/appPhoneGap/ext/findCity.php',
+		dataType: 'jsonp',
+		data: "stato=" + valore,
+		jsonp: 'jsoncallback',
+		timeout: 5000,
+		success: function(data, status){
+			$("#citta").empty();
+			$("#citta").text("");
+			$("#citta").append('<option value="" selected="select">Seleziona una città</option>');
+			$.each(data, function(i,item){
+				
+				$("#citta").append('<option value="'+this["citta"]+'" >'+this["citta"]+'</option>');
+			});
+			
+			findCap(valore);
+		},
+		error: function(jqXHR, exception){
+			if (jqXHR.status === 0) {
+				alert('Not connect.\n Verify Network.');
+			} else if (jqXHR.status == 404) {
+				alert('Requested page not found. [404]');
+			} else if (jqXHR.status == 500) {
+				alert('Internal Server Error [500].');
+			} else if (exception === 'parsererror') {
+				alert('Requested JSON parse failed.');
+			} else if (exception === 'timeout') {
+				alert('Time out error.');
+			} else if (exception === 'abort') {
+				alert('Ajax request aborted.');
+			} else {
+				alert('Uncaught Error.\n' + jqXHR.responseText);
+			}
+		}
+	});
+	
+	
+}
+
+function findCap(valore) {
+	$.ajax({
+		url: 'http://test.vision121.it/appPhoneGap/ext/findCap.php',
+		dataType: 'jsonp',
+		data: "stato=" + valore,
+		jsonp: 'jsoncallback',
+		timeout: 5000,
+		success: function(data, status){
+			$("#cap").empty();
+			$("#cap").append('<option value="" selected="select">Seleziona un cap</option>');
+			$.each(data, function(i,item){
+				$("#cap").append('<option value="'+this["cap"]+'" >'+this["cap"]+'</option>');
+			});
+		},
+		error: function(jqXHR, exception){
+			if (jqXHR.status === 0) {
+				alert('Not connect.\n Verify Network.');
+			} else if (jqXHR.status == 404) {
+				alert('Requested page not found. [404]');
+			} else if (jqXHR.status == 500) {
+				alert('Internal Server Error [500].');
+			} else if (exception === 'parsererror') {
+				alert('Requested JSON parse failed.');
+			} else if (exception === 'timeout') {
+				alert('Time out error.');
+			} else if (exception === 'abort') {
+				alert('Ajax request aborted.');
+			} else {
+				alert('Uncaught Error.\n' + jqXHR.responseText);
+			}
+		}
+	});
+	
+	
+}
+
+
+
+
+</script>
+
+</head>
+<body>
+<div data-role="page" id="company" data-backbtn="false" data-theme="a">
+        <div id="header" data-theme="a" data-role="header" data-backbtn="false" data-position="fixed">
+            <div class="logo" data-theme="a"> <a href="index.html" rel="external"><img src="http://test.vision121.it/appPhoneGap/img/logo.png" alt="logo" /></a></div>
+            <div data-role="navbar" data-grid="b" data-theme="a" >
+              <ul>
+                <li> <a id="btnChiSiamo" data-role="button" data-theme="a" data-transition="slide" href="company.html" > Company </a> </li>
+                <li> <a id="btnProdotti" data-role="button" data-theme="a" data-transition="slide" href="products.html" rel="external" > Products </a> </li>
+                <li> <a id="btnNews" data-role="button" data-theme="a" data-transition="slide" href="news.html" rel="external" > News </a> </li>                
+                <li> <a id="btnDealers" data-role="button" data-theme="a" data-transition="slide" href="dealers.html" rel="external"  class="ui-btn-active ui-state-persist"> Dealers </a> </li>
+                <li> <a id="btnContact" data-role="button" data-theme="a" data-transition="slide" href="contacts.html" rel="external"> Contact </a> </li>
+                <li><a id="back" data-role="button" data-theme="a" href="index.html" rel="external">Home</a></li>
+              </ul>
+            </div>
+        </div>
+        <div data-role="content">
+            <div id="form-container">
+               <form id="user-location" name="form1" method="post" action="#">
+                <div id="form-input" style="width:100%; clear:both; float:left;">
+                    <fieldset>
+                        <label>Nazione:</label> 
+                        <select id="stato" name="stato" onchange="javascript:findSearch(this.value);">
+                            <option value="">Search</option>
+                        </select>
+                    </fieldset>
+                </div>
+                <div id="form-input" style="width:100%; clear:both; float:left;">
+                    <fieldset>
+                        <label>Citt&agrave;:</label> 
+                        <select id="citta" name="citta" onChange="javascript:searchDealersCitta(this.value);">
+                            <option value="">Search</option>
+                        </select>
+                    </fieldset>
+                </div>
+                <div id="form-input" style="width:100%; clear:both; float:left;">
+                    <fieldset>
+                        <label>CAP:</label> 
+                        <select id="cap" name="cap"  onChange="javascript:searchDealersCap(this.value);">
+                            <option value="">Search</option>
+                        </select>
+                    </fieldset>
+                </div>
+                
+                </form> 
+          </div>
+    
+          <div id="map-container">
+            <div id="loc-list">
+                <ul id="list"></ul>
+            </div>
+          </div>
+
+            <script>
+				/*$(function() {
+				  $('#map-container').storeLocator({'slideMap' : false, 'defaultLoc': true, 'defaultLat': '44.9207462', 'defaultLng' : '-93.3935366' });
+				});*/
+				var dati = '';
+				function searchDealersCap(valore) {
+					$.ajax({
+						url: 'http://test.vision121.it/appPhoneGap/ext/searchDealersCap.php',
+						dataType: 'jsonp',
+						data: "valore=" + valore,
+						jsonp: 'jsoncallback',
+						timeout: 5000,
+						success: function(data, status){
+							
+							dati = data;
+							$("#list").empty();
+							$.each(data, function(i,item){	
+							//https://maps.google.it/maps?q=-40+-50&hl=it&sll=45.535324,11.942663&sspn=0.488188,1.056747&t=m&z=3
+								$("#list").append('<img src="https://maps.googleapis.com/maps/api/staticmap?center='+this["address"]+', '+this["postal"]+', '+this["city"]+', '+this["state"]+'&amp;zoom=12&amp;size=288x200&amp;markers='+this["address"]+', '+this["postal"]+', '+this["city"]+', '+this["state"]+'&amp;sensor=false" width="288" height="200">');	
+								$("#list").append("<li><b>"+this["locname"]+"</b></li>");
+								$("#list").append("<li>"+this["address"]+"</li>");
+								$("#list").append("<li>"+this["postal"]+" - "+this["city"]+"</li>");
+								$("#list").append("<li>"+this["state"]+"</li>");
+								$("#list").append("<li>Tel: "+this["phone"]+"</li>");
+								$("#list").append("<li>E-Mail: "+this["mail"]+"</li>");
+								$("#list").append('<li style="border-bottom:1px solid #d6d6d6;"></li>');
+							});
+							
+							
+						},
+						error: function(jqXHR, exception){
+							if (jqXHR.status === 0) {
+								alert('Not connect.\n Verify Network.');
+							} else if (jqXHR.status == 404) {
+								alert('Requested page not found. [404]');
+							} else if (jqXHR.status == 500) {
+								alert('Internal Server Error [500].');
+							} else if (exception === 'parsererror') {
+								alert('Requested JSON parse failed.');
+							} else if (exception === 'timeout') {
+								alert('Time out error.');
+							} else if (exception === 'abort') {
+								alert('Ajax request aborted.');
+							} else {
+								alert('Uncaught Error.\n' + jqXHR.responseText);
+							}
+						}
+					});
+					
+					
+				}
+				
+				function searchDealersCitta(valore) {
+					$.ajax({
+						url: 'http://test.vision121.it/appPhoneGap/ext/searchDealersCitta.php',
+						dataType: 'jsonp',
+						data: "valore=" + valore,
+						jsonp: 'jsoncallback',
+						timeout: 5000,
+						success: function(data, status){
+							//$('#map-container').storeLocator({'jsonData': true, 'dataLocation': data});
+							//alert(data);
+							
+							/*$(function() {
+							  $('#map-container').storeLocator({'inputID' : 'citta', 'jsonData': true, 'dataLocation': dati });
+							});*/
+							$("#list").empty();
+							$.each(data, function(i,item){		
+								$("#list").append('<img src="https://maps.googleapis.com/maps/api/staticmap?center='+this["address"]+', '+this["postal"]+', '+this["city"]+', '+this["state"]+'&amp;zoom=12&amp;size=288x200&amp;markers='+this["address"]+', '+this["postal"]+', '+this["city"]+', '+this["state"]+'&amp;sensor=false" width="288" height="200">');	
+								$("#list").append("<li><b>"+this["locname"]+"</b></li>");
+								$("#list").append("<li>"+this["address"]+"</li>");
+								$("#list").append("<li>"+this["postal"]+" - "+this["city"]+"</li>");
+								$("#list").append("<li>"+this["state"]+"</li>");
+								$("#list").append("<li>Tel: "+this["phone"]+"</li>");
+								$("#list").append("<li>E-Mail: "+this["mail"]+"</li>");
+								
+								$("#list").append('<li style="border-bottom:1px solid #d6d6d6;"></li>');
+							});
+							
+						},
+						error: function(jqXHR, exception){
+							if (jqXHR.status === 0) {
+								alert('Not connect.\n Verify Network.');
+							} else if (jqXHR.status == 404) {
+								alert('Requested page not found. [404]');
+							} else if (jqXHR.status == 500) {
+								alert('Internal Server Error [500].');
+							} else if (exception === 'parsererror') {
+								alert('Requested JSON parse failed.');
+							} else if (exception === 'timeout') {
+								alert('Time out error.');
+							} else if (exception === 'abort') {
+								alert('Ajax request aborted.');
+							} else {
+								alert('Uncaught Error.\n' + jqXHR.responseText);
+							}
+						}
+					});
+					
+					
+				}
+				//alert(dati);
+				/*$(function() {
+				  $('#map-container').storeLocator({'inputID' : 'cap', 'jsonData': true, 'dataLocation': dati });
+				});*/
+            </script>
+        </div>        
+        <div data-role="footer" id="footerDiv" role="footer">
+            <h4 id="c-copy"> </h4>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,394 @@
+/* CSS Document */
+body {
+	background-color:#000000;
+	font-size:12px;
+}
+
+.ui-body-c {
+	background-color:#000000!important;
+	
+}
+
+a {
+	color:#ffffff;
+	font-size:14px;
+}
+
+a:hover {
+	color:#b40000;
+	text-decoration:none;
+}
+
+#header {
+	width:100%;
+	float:left;
+	clear:both;
+}
+
+#header .logo {
+	padding:10px;	
+}
+
+.content {
+	float:left;
+	clear:both;
+	background-color: #000000;
+	color:#ffffff;
+}
+
+.img {
+	width:100%;
+}
+
+.ui-content {
+	padding:0;
+	background-color:#000;
+}
+
+.ui-page {
+	background-color:#000000;
+}
+
+#footerDiv {
+	background-color:#000;
+	width:100%;
+	height:30px;
+	text-align:center;
+	float:left;
+	clear:both;
+}
+
+#footerDiv h4 {
+	color:#ffffff;
+	font-size:small;
+	line-height:30px;
+}
+
+/*HOMEPAGE*/
+#home-cont {
+	width:100%;
+	height:200px;
+	background-image:url(../img/bg-homepage.jpg)!important;
+	/*background-color:#000;*/
+}
+
+#txt-home {
+	font-size:large;
+	color:#d6d6d6;
+	text-align:center;
+	width:100%;
+	/*position:relative;
+	top:0;
+	left:0;*/
+}
+
+/*company*/
+.box-txt {
+	margin:20px;
+	text-align:justify;
+	background-color:#000;
+}
+
+
+/* lista prodotti*/
+#dett-prod {
+	width:100%;
+	margin:0;
+	padding:0;
+	text-align:center;
+}
+
+#lista-prod ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+#lista-prod li {
+	margin:5px 5px 10px 0px;
+	padding:5px 5px 5px 5px;
+	list-style:none;
+	float:left;
+	width:25%;
+	text-align:center;
+	border-top:1px solid #212121;
+	border-right:1px solid #212121;
+	border-left:1px solid #212121;
+	border-bottom:-1px solid #212121;
+	cursor:pointer;
+}
+
+#lista-prod li img {
+	width:100%;
+}
+
+/*DETT PROD*/
+#menu-prod {
+	width:100%;
+	margin:10px;
+	padding:10px;
+	float:left;
+	font-size:1em;
+}
+
+#menu-prod a {
+	font-size:1em;
+	color:#ffffff;
+}
+
+#menu-prod a:hover {
+	color:#b40000;
+}
+
+#dett-prod-img {
+	width:90%;	
+	margin:0 5% 20px 5%;
+	float:left;
+	clear:both;
+}
+
+#dett-prod-img img{
+	width:100%;
+}
+
+#dett-prod-txt {
+	width:90%;
+	margin:0 5% 20px 5%;
+	float:left;
+	clear:both;
+	font-size:1em;
+	text-align:justify;
+}
+
+#dett-prod-txt h2 {
+	font-size:2em;
+}
+
+/* lista news*/
+#dett-news {
+	width:100%;
+	margin:0;
+	padding:0;
+	text-align:center;
+}
+
+#dett-news .gallery {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+#dett-news .gallery li {
+	list-style:none;
+	float:left;
+	width:150px;
+	padding:5px;
+}
+
+#lista-news ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+#lista-news li {
+	margin:5px 5px 10px 0px;
+	padding:5px 5px 5px 5px;
+	list-style:none;
+	float:left;
+	width:25%;
+	text-align:center;
+	border-top:1px solid #212121;
+	border-right:1px solid #212121;
+	border-left:1px solid #212121;
+	border-bottom:-1px solid #212121;
+	cursor:pointer;
+}
+
+#lista-news li img {
+	width:100%;
+}
+
+/*DETT NEWS*/
+#menu-news {
+	width:100%;
+	margin:10px;
+	float:left;
+	font-size:1em;
+}
+
+#menu-news a {
+	font-size:1em;
+	color:#ffffff;
+}
+
+#menu-news a:hover {
+	color:#b40000;
+}
+
+#dett-news-img {
+	width:90%;	
+	margin:0 5% 20px 5%;
+	float:left;
+	clear:both;
+}
+
+#dett-news-img img{
+	width:100%;
+}
+
+#dett-news-txt {
+	width:90%;
+	margin:0 5% 20px 5%;
+	float:left;
+	clear:both;
+	font-size:0.5em;
+	text-align:justify;
+}
+
+#dett-news-txt h2 {
+	font-size:2em;
+}
+
+/*-----------------------------------*/
+/* DEALERS */
+
+.form-input {
+	float:left;
+	margin:5px;
+	clear:both;
+}
+
+#form-container
+{
+	clear: left;
+	float: left;
+	margin-top: 15px;
+	width: 100%;
+}
+
+#map-container
+{
+	clear: left;
+	float: left;
+	margin: 5%;
+	width: 90%;
+}
+
+
+#map-container a
+{
+	color: #e76737;
+	text-decoration: none;
+}
+
+#map-container a:hover, #map-container a:active
+{
+	text-decoration: underline;
+}
+
+#loc-list
+{
+	float: left; 
+	width: 225px;
+	height: 530px;
+	overflow: auto;
+}
+
+#loc-list ul
+{
+	display: block;
+	clear: left;
+	float: left;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#loc-list .list-label
+{
+	float: left;
+	margin-left: 6px;
+	padding: 2px 3px;
+	width: 17px;
+	text-align: center;
+	background: #451400;
+	color: #fff;
+	font-weight: bold;
+}
+
+#loc-list .list-details
+{
+	float: left;
+	margin-left: 6px;
+	width: 165px;
+}
+
+#loc-list .list-content
+{
+	padding: 10px;
+}
+
+#loc-list .loc-dist
+{
+	font-weight: bold;
+	font-style: italic;
+	color: #8e8e8e;
+}
+
+#loc-list li
+{
+	display: block;
+	clear: left;
+	float: left;
+	margin: 10px 0;
+	cursor: pointer;
+	width: 205px;
+}
+
+#map-container .loc-name
+{
+	color: #AD2118;
+	font-weight: bold;
+}
+
+#search-form
+{
+	clear: left;
+	float: left;
+	height: 60px;
+}
+
+#form-input
+{
+	float: left;
+	margin-top: 3px;
+}
+
+#form-input label
+{
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
